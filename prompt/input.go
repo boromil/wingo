@@ -15,9 +15,9 @@ import (
 	"github.com/BurntSushi/xgbutil/xrect"
 	"github.com/BurntSushi/xgbutil/xwindow"
 
-	"github.com/BurntSushi/wingo/misc"
-	"github.com/BurntSushi/wingo/render"
-	"github.com/BurntSushi/wingo/text"
+	"github.com/boromil/wingo/misc"
+	"github.com/boromil/wingo/render"
+	"github.com/boromil/wingo/text"
 )
 
 type Input struct {

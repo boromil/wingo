@@ -10,7 +10,7 @@ import (
 
 	"github.com/BurntSushi/xgbutil"
 
-	"github.com/BurntSushi/wingo/logger"
+	"github.com/boromil/wingo/logger"
 )
 
 var subs subscriptions
@@ -99,13 +99,13 @@ func eventToMap(ev Event) map[string]interface{} {
 }
 
 type subscriptions struct {
-	add chan chan subscriber // sends info back on the given channel
+	add    chan chan subscriber // sends info back on the given channel
 	remove chan int
 	notify chan Event
 }
 
 type subscriber struct {
-	id int
+	id     int
 	events chan Event
 }
 

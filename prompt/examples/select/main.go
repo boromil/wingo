@@ -9,11 +9,11 @@ import (
 	"github.com/BurntSushi/xgbutil"
 	"github.com/BurntSushi/xgbutil/keybind"
 	"github.com/BurntSushi/xgbutil/xevent"
-	"github.com/BurntSushi/xgbutil/xrect"
 	"github.com/BurntSushi/xgbutil/xinerama"
+	"github.com/BurntSushi/xgbutil/xrect"
 	"github.com/BurntSushi/xgbutil/xwindow"
 
-	"github.com/BurntSushi/wingo/prompt"
+	"github.com/boromil/wingo/prompt"
 )
 
 var (

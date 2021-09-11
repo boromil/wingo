@@ -21,20 +21,20 @@ import (
 	"github.com/BurntSushi/xgbutil/xgraphics"
 	"github.com/BurntSushi/xgbutil/xwindow"
 
-	"github.com/BurntSushi/wingo/misc"
-	"github.com/BurntSushi/wingo/render"
-	"github.com/BurntSushi/wingo/text"
+	"github.com/boromil/wingo/misc"
+	"github.com/boromil/wingo/render"
+	"github.com/boromil/wingo/text"
 )
 
 var (
 	// A near guaranteed font. If parsing fails, MustFont wll panic.
 	font = xgraphics.MustFont(xgraphics.ParseFont(
 		bytes.NewBuffer(misc.DataFile("DejaVuSans.ttf"))))
-	fontSize = 30.0
+	fontSize  = 30.0
 	fontColor = render.NewImageColor(color.RGBA{0x0, 0x0, 0x0, 0xff})
-	bgColor = render.NewImageColor(color.RGBA{0xff, 0xff, 0xff, 0xff})
-	width = 800
-	padding = 10
+	bgColor   = render.NewImageColor(color.RGBA{0xff, 0xff, 0xff, 0xff})
+	width     = 800
+	padding   = 10
 )
 
 func fatal(err error) {

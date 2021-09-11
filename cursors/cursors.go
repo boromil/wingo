@@ -6,7 +6,7 @@ import (
 	"github.com/BurntSushi/xgbutil"
 	"github.com/BurntSushi/xgbutil/xcursor"
 
-	"github.com/BurntSushi/wingo/logger"
+	"github.com/boromil/wingo/logger"
 )
 
 var (
