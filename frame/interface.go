@@ -51,8 +51,11 @@ func ClientToFrame(f Frame, gravity, x, y, w, h int) (int, int, int, int) {
 		h + f.Top() + f.Bottom()
 }
 
-func validateWidthHeight(f Frame, validate bool,
-	w, h int) (fw, fh, cw, ch int) {
+func validateWidthHeight(
+	f Frame,
+	validate bool,
+	w, h int,
+) (fw, fh, cw, ch int) {
 
 	fw, fh, cw, ch = w, h, w, h
 

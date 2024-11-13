@@ -22,7 +22,10 @@ func (f *Borders) newPieceWindow(ident string,
 			"Unfortunately, we must exit.")
 	}
 
-	err = win.CreateChecked(f.parent.Id, 0, 0, 1, 1,
+	err = win.CreateChecked(
+		f.parent.Id,
+		0, 0,
+		1, 1,
 		xproto.CwBackPixmap|xproto.CwEventMask|xproto.CwCursor,
 		xproto.BackPixmapParentRelative,
 		xproto.EventMaskButtonPress|xproto.EventMaskButtonRelease|

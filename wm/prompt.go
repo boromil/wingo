@@ -65,7 +65,7 @@ func filterClient(client Client, activeWrk, visible, iconified bool) bool {
 	return true
 }
 
-func PopupError(format string, vals ...interface{}) {
+func PopupError(format string, vals ...any) {
 	if !Config.ShowErrors {
 		return
 	}
@@ -77,7 +77,7 @@ func PopupError(format string, vals ...interface{}) {
 	Prompts.Message.Show(Workspace().Geom(), msg, 0, nada)
 }
 
-func FYI(format string, vals ...interface{}) {
+func FYI(format string, vals ...any) {
 	if !Config.ShowFyi {
 		return
 	}
@@ -104,7 +104,7 @@ func ShowCycleClient(keyStr string, activeWrk, visible, iconified bool) {
 }
 
 func ShowSelectClient(tabComp int, activeWrk, visible, iconified bool,
-	data interface{}) {
+	data any) {
 
 	allWrks := Heads.Workspaces.Wrks
 
@@ -128,7 +128,7 @@ func ShowSelectClient(tabComp int, activeWrk, visible, iconified bool,
 	Prompts.Slct.Show(Workspace().Geom(), tabComp, groups, data)
 }
 
-func ShowSelectWorkspace(tabComp int, data interface{}) {
+func ShowSelectWorkspace(tabComp int, data any) {
 	allWrks := Heads.Workspaces.Wrks
 	visibles := Heads.VisibleWorkspaces()
 

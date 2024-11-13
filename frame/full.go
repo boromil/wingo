@@ -337,8 +337,8 @@ func (f *Full) UpdateIcon() {
 	img := f.client.Icon(size-4, size-4)
 
 	sub := image.Rect(2, 2, size-2, size-2)
-	xgraphics.Blend(imgA.SubImage(sub).(*xgraphics.Image), img, image.ZP)
-	xgraphics.Blend(imgI.SubImage(sub).(*xgraphics.Image), img, image.ZP)
+	xgraphics.Blend(imgA.SubImage(sub).(*xgraphics.Image), img, image.Point{})
+	xgraphics.Blend(imgI.SubImage(sub).(*xgraphics.Image), img, image.Point{})
 
 	f.icon.Create(imgA.Image, imgI.Image)
 

@@ -124,7 +124,7 @@ another command.
 }
 
 func (cmd Input) Run() gribble.Value {
-	inputted := make(chan string, 0)
+	inputted := make(chan string)
 
 	response := func(inp *prompt.Input, text string) {
 		inputted <- text

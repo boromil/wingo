@@ -64,7 +64,7 @@ func New(id xproto.Window) *Client {
 		skipTaskbar: false,
 		skipPager:   false,
 		demanding:   false,
-		attnQuit:    make(chan struct{}, 0),
+		attnQuit:    make(chan struct{}),
 	}
 
 	c.manage()
@@ -74,7 +74,7 @@ func New(id xproto.Window) *Client {
 	// If someone really wants it, we can add a new "startup_managed" hook
 	// or something.
 	if !wm.Startup {
-		event.Notify(event.ManagedClient{c.Id()})
+		event.Notify(event.ManagedClient{Id: c.Id()})
 		c.FireHook(hook.Managed)
 	}
 	if !c.iconified {
@@ -95,7 +95,7 @@ func (c *Client) manage() {
 		logger.Message.Printf("Managing new client: %s", c)
 	}
 
-	promptDone := make(chan struct{}, 0)
+	promptDone := make(chan struct{})
 	go func() {
 		c.prompts = c.newClientPrompts()
 		promptDone <- struct{}{}
@@ -378,7 +378,7 @@ func (c *Client) findPresumedWorkspace() workspace.Workspacer {
 	if d == 0xFFFFFFFF {
 		return wm.StickyWrk
 	}
-	if d < 0 || d >= uint(len(wm.Heads.Workspaces.Wrks)) {
+	if d >= uint(len(wm.Heads.Workspaces.Wrks)) {
 		return wm.Workspace()
 	}
 	return wm.Heads.Workspaces.Get(int(d))

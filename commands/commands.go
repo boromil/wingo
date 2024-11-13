@@ -156,7 +156,7 @@ var (
 	// SafeReturn is the means through which a return value from a Gribble
 	// command is synchronously returned with respext to the X main event loop.
 	// See SafeExec.
-	SafeReturn = make(chan gribble.Value, 0)
+	SafeReturn = make(chan gribble.Value)
 
 	// Regex for enforcing tag name constraints.
 	validTagName = regexp.MustCompile("^[-a-zA-Z0-9_]+$")

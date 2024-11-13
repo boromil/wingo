@@ -11,8 +11,8 @@ import (
 
 type SelectChoice interface {
 	SelectText() string
-	SelectSelected(data interface{})
-	SelectHighlighted(data interface{})
+	SelectSelected(data any)
+	SelectHighlighted(data any)
 }
 
 type SelectItem struct {

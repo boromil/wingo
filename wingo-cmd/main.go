@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net"
 	"os"
@@ -109,12 +109,12 @@ func getCommands() (cmds string) {
 		var err error
 
 		if flagFileInput == "-" { // stdin
-			contents, err = ioutil.ReadAll(os.Stdin)
+			contents, err = io.ReadAll(os.Stdin)
 			if err != nil {
 				log.Fatalf("Could not read stdin: %s", err)
 			}
 		} else {
-			contents, err = ioutil.ReadFile(flagFileInput)
+			contents, err = os.ReadFile(flagFileInput)
 			if err != nil {
 				log.Fatalf("Could not read file '%s': %s", flagFileInput, err)
 			}

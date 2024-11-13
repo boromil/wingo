@@ -84,7 +84,7 @@ func (c *Client) refreshName() {
 			c.prompts.updateName()
 			ewmh.WmVisibleNameSet(wm.X, c.Id(), c.name)
 
-			event.Notify(event.ChangedClientName{c.Id()})
+			event.Notify(event.ChangedClientName{Id: c.Id()})
 		}
 	}()
 

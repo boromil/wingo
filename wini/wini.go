@@ -1,17 +1,17 @@
 /*
-   Package wini provides an ini-like file parser. Namely, a wini parser.
+Package wini provides an ini-like file parser. Namely, a wini parser.
 
-   A wini file is very similar to a traditional ini file, except it doesn't
-   have any quoting mechanism, uses ':=' instead of '=', and allows simple
-   variables.
+A wini file is very similar to a traditional ini file, except it doesn't
+have any quoting mechanism, uses ':=' instead of '=', and allows simple
+variables.
 
-   Variables are extremely useful when theming.
+Variables are extremely useful when theming.
 
-   We also do our best to provide helpful error messages, so we can more
-   precisely slap the user when they've gone wrong :-)
+We also do our best to provide helpful error messages, so we can more
+precisely slap the user when they've gone wrong :-)
 
-   This package is heavily inspired by glacjay's "goini" package:
-   https://github.com/glacjay/goini
+This package is heavily inspired by glacjay's "goini" package:
+https://github.com/glacjay/goini
 */
 package wini
 
@@ -182,7 +182,7 @@ func (d *Data) Sections() []string {
 	sections := make([]string, len(d.data))
 
 	i := 0
-	for s, _ := range d.data {
+	for s := range d.data {
 		sections[i] = s
 		i++
 	}
@@ -210,9 +210,13 @@ func (d *Data) Keys(section string) []Key {
 	if s, ok := d.data[skey]; ok {
 		keys := make([]Key, len(s))
 		i := 0
-		for k, _ := range s {
-			keys[i] = Key{data: d, section: skey, key: k,
-				niceSection: section}
+		for k := range s {
+			keys[i] = Key{
+				data:        d,
+				section:     skey,
+				key:         k,
+				niceSection: section,
+			}
 			i++
 		}
 		return keys
@@ -224,41 +228,55 @@ func (k Key) Strings() []string {
 	return k.vals()
 }
 
-func (k Key) Bools() ([]bool, error) {
-	bvals := make([]bool, len(k.vals()))
-	for i, val := range k.vals() {
-		v := strings.ToLower(val)[0]
-		if v == 'y' || v == '1' || v == 't' {
-			bvals[i] = true
-			continue
-		}
-		if v == 'n' || v == '0' || v == 'f' {
-			bvals[i] = false
-			continue
-		}
-		return nil, k.Err("Not a valid boolean value: '%s'.", val)
+func (k Key) asBool(val string) (bool, error) {
+	switch val {
+	case "y", "Y":
+		return true, nil
+	case "n", "N":
+		return false, nil
 	}
-	return bvals, nil
+
+	bval, err := strconv.ParseBool(val)
+	if err != nil {
+		return false, k.Err("Not a valid boolean value: '%s'.", val)
+	}
+	return bval, nil
+}
+
+func (k Key) Bools() ([]bool, error) {
+	return mapFunc(k.vals(), k.asBool)
+}
+
+func (k Key) asInt(val string) (int, error) {
+	ival, err := strconv.ParseInt(val, 10, 64)
+	if err != nil {
+		return 0, k.Err("'%s' is not an integer. (%s)", val, err)
+	}
+	return int(ival), nil
 }
 
 func (k Key) Ints() ([]int, error) {
-	ivals := make([]int, len(k.vals()))
-	for i, val := range k.vals() {
-		ival, err := strconv.ParseInt(val, 0, 0)
-		if err != nil {
-			return nil, k.Err("'%s' is not an integer. (%s)", val, err)
-		}
-		ivals[i] = int(ival)
+	return mapFunc(k.vals(), k.asInt)
+}
+
+func (k Key) asFloat(val string) (float64, error) {
+	fval, err := strconv.ParseFloat(val, 64)
+	if err != nil {
+		return 0, k.Err("'%s' is not a decimal. (%s)", val, err)
 	}
-	return ivals, nil
+	return fval, nil
 }
 
 func (k Key) Floats() ([]float64, error) {
-	fvals := make([]float64, len(k.vals()))
-	for i, val := range k.vals() {
-		fval, err := strconv.ParseFloat(val, 64)
+	return mapFunc(k.vals(), k.asFloat)
+}
+
+func mapFunc[T any, S any](values []T, fn func(v T) (S, error)) ([]S, error) {
+	fvals := make([]S, len(values))
+	for i, val := range values {
+		fval, err := fn(val)
 		if err != nil {
-			return nil, k.Err("'%s' is not a decimal. (%s)", val, err)
+			return nil, err
 		}
 		fvals[i] = fval
 	}
@@ -277,14 +295,18 @@ func (k Key) vals() []string {
 	return k.data.data[k.section][k.key]
 }
 
-func winiError(lnum int, formatted string, vals ...interface{}) error {
+func winiError(lnum int, formatted string, vals ...any) error {
 	msg := fmt.Sprintf(formatted, vals...)
 	return errors.New(fmt.Sprintf("wini parse error on line %d: %s", lnum, msg))
 }
 
-func (k Key) Err(formatted string, vals ...interface{}) error {
+func (k Key) Err(formatted string, vals ...any) error {
 	msg := fmt.Sprintf(formatted, vals...)
-	return errors.New(fmt.Sprintf("There was an error reading the value for "+
-		"the option '%s' in section '%s': %s",
-		k.key, k.niceSection, msg))
+	return errors.New(
+		fmt.Sprintf(
+			"There was an error reading the value for "+
+				"the option '%s' in section '%s': %s",
+			k.key, k.niceSection, msg,
+		),
+	)
 }

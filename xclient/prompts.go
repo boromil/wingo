@@ -83,13 +83,13 @@ func (c *Client) SelectText() string {
 	return c.String()
 }
 
-func (c *Client) SelectSelected(data interface{}) {
+func (c *Client) SelectSelected(data any) {
 	if f := data.(SelectData).Selected; f != nil {
 		f(c)
 	}
 }
 
-func (c *Client) SelectHighlighted(data interface{}) {
+func (c *Client) SelectHighlighted(data any) {
 	if f := data.(SelectData).Highlighted; f != nil {
 		f(c)
 	}

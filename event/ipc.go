@@ -85,13 +85,13 @@ func handleSubscriber(conn net.Conn) {
 
 // eventToMap converts an event struct into a map.
 // This is a terrible hack in order to inject the event name automatically.
-func eventToMap(ev Event) map[string]interface{} {
+func eventToMap(ev Event) map[string]any {
 	rv := reflect.ValueOf(ev)
 	rt := rv.Type()
-	m := make(map[string]interface{})
+	nf := rv.NumField()
+	m := make(map[string]any, nf+1)
 
 	m["EventName"] = rt.Name()
-	nf := rv.NumField()
 	for i := 0; i < nf; i++ {
 		m[rt.Field(i).Name] = rv.Field(i).Interface()
 	}

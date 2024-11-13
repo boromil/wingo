@@ -22,15 +22,15 @@ var (
 )
 
 type item struct {
-	text string
-	group int
+	text       string
+	group      int
 	promptItem *prompt.SelectItem
 }
 
 func newItem(text string, group int) *item {
 	return &item{
-		text: text,
-		group: group,
+		text:       text,
+		group:      group,
 		promptItem: nil,
 	}
 }
@@ -39,11 +39,11 @@ func (item *item) SelectText() string {
 	return item.text
 }
 
-func (item *item) SelectHighlighted(data interface{}) {
+func (item *item) SelectHighlighted(data any) {
 	log.Printf("highlighted: %s", item.text)
 }
 
-func (item *item) SelectSelected(data interface{}) {
+func (item *item) SelectSelected(data any) {
 	log.Printf("selected: %s", item.text)
 }
 

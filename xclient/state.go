@@ -101,7 +101,5 @@ func (c *Client) LoadState(name string) {
 }
 
 func (c *Client) DeleteState(name string) {
-	if _, ok := c.states[name]; ok {
-		delete(c.states, name)
-	}
+	delete(c.states, name)
 }

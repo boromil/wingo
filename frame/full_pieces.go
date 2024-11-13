@@ -47,8 +47,8 @@ func (f *Full) newButtonClose() *piece {
 		f.theme.TitleSize, f.theme.TitleSize,
 		render.GradientVert, render.GradientRegular)
 
-	xgraphics.Blend(imgA.Image, f.theme.ACloseButton, image.ZP)
-	xgraphics.Blend(imgI.Image, f.theme.ICloseButton, image.ZP)
+	xgraphics.Blend(imgA.Image, f.theme.ACloseButton, image.Point{})
+	xgraphics.Blend(imgI.Image, f.theme.ICloseButton, image.Point{})
 
 	win := f.newPieceWindow("close", 0)
 	win.MROpt(fY|fW|fH,
@@ -65,8 +65,8 @@ func (f *Full) newButtonMaximize() *piece {
 		f.theme.TitleSize, f.theme.TitleSize,
 		render.GradientVert, render.GradientRegular)
 
-	xgraphics.Blend(imgA.Image, f.theme.AMaximizeButton, image.ZP)
-	xgraphics.Blend(imgI.Image, f.theme.IMaximizeButton, image.ZP)
+	xgraphics.Blend(imgA.Image, f.theme.AMaximizeButton, image.Point{})
+	xgraphics.Blend(imgI.Image, f.theme.IMaximizeButton, image.Point{})
 
 	win := f.newPieceWindow("maximize", 0)
 	win.MROpt(fY|fW|fH,
@@ -83,8 +83,8 @@ func (f *Full) newButtonMinimize() *piece {
 		f.theme.TitleSize, f.theme.TitleSize,
 		render.GradientVert, render.GradientRegular)
 
-	xgraphics.Blend(imgA.Image, f.theme.AMinimizeButton, image.ZP)
-	xgraphics.Blend(imgI.Image, f.theme.IMinimizeButton, image.ZP)
+	xgraphics.Blend(imgA.Image, f.theme.AMinimizeButton, image.Point{})
+	xgraphics.Blend(imgI.Image, f.theme.IMinimizeButton, image.Point{})
 
 	win := f.newPieceWindow("minimize", 0)
 	win.MROpt(fY|fW|fH,

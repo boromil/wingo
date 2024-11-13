@@ -2,7 +2,7 @@ package misc
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"path"
 
 	"github.com/BurntSushi/xdg"
@@ -41,7 +41,7 @@ func DataFile(name string) []byte {
 	if err != nil {
 		logger.Error.Fatalln(err)
 	}
-	bs, err := ioutil.ReadFile(fpath)
+	bs, err := os.ReadFile(fpath)
 	if err != nil {
 		logger.Error.Fatalf("Could not read %s: %s", fpath, err)
 	}

@@ -39,7 +39,7 @@ type Select struct {
 	config SelectConfig
 
 	showing     bool
-	data        interface{}
+	data        any
 	selected    int
 	tabComplete int
 
@@ -220,7 +220,7 @@ func (slct *Select) keyResponse() xevent.KeyPressFun {
 }
 
 func (slct *Select) Show(workarea xrect.Rect, tabCompleteType int,
-	groups []*SelectShowGroup, data interface{}) bool {
+	groups []*SelectShowGroup, data any) bool {
 
 	if slct.showing {
 		return false

@@ -1,7 +1,7 @@
 package wm
 
 import (
-	"io/ioutil"
+	"os"
 	"strconv"
 	"strings"
 
@@ -173,7 +173,7 @@ func setImage(k wini.Key, place **xgraphics.Image) {
 
 func setFont(k wini.Key, place **truetype.Font) {
 	if v, ok := getLastString(k); ok {
-		bs, err := ioutil.ReadFile(v)
+		bs, err := os.ReadFile(v)
 		if err != nil {
 			logger.Warning.Printf(
 				"Could not get font data from '%s' because: %v", v, err)

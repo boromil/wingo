@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"path"
@@ -98,7 +98,7 @@ func init() {
 
 	// If the log level is 0, don't show XGB log output either.
 	if flagLogLevel == 0 || flagShowSocket {
-		xgb.Logger = log.New(ioutil.Discard, "", 0)
+		xgb.Logger = log.New(io.Discard, "", 0)
 	}
 }
 
@@ -226,7 +226,7 @@ EVENTLOOP:
 		if !found {
 			os.Args = append(os.Args, "--wingo-restarted")
 		}
-		logger.Message.Println("The user has told us to restart...\n\n\n")
+		logger.Message.Println("The user has told us to restart...")
 		execPath, err := os.Executable()
 		if err != nil {
 			logger.Warning.Printf("could not find executable: %s\n", err)

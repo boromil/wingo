@@ -6,9 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-)
 
-import (
 	. "github.com/str1ngs/ansi/color"
 )
 
@@ -88,7 +86,7 @@ func Colors(enable bool) {
 	colors = enable
 }
 
-func (lg *logger) Print(v ...interface{}) {
+func (lg *logger) Print(v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -100,7 +98,7 @@ func (lg *logger) Print(v ...interface{}) {
 	}
 }
 
-func (lg *logger) Printf(format string, v ...interface{}) {
+func (lg *logger) Printf(format string, v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -112,7 +110,7 @@ func (lg *logger) Printf(format string, v ...interface{}) {
 	}
 }
 
-func (lg *logger) Println(v ...interface{}) {
+func (lg *logger) Println(v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -124,7 +122,7 @@ func (lg *logger) Println(v ...interface{}) {
 	}
 }
 
-func (lg *logger) Fatal(v ...interface{}) {
+func (lg *logger) Fatal(v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -137,7 +135,7 @@ func (lg *logger) Fatal(v ...interface{}) {
 	os.Exit(1)
 }
 
-func (lg *logger) Fatalf(format string, v ...interface{}) {
+func (lg *logger) Fatalf(format string, v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -150,7 +148,7 @@ func (lg *logger) Fatalf(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-func (lg *logger) Fatalln(v ...interface{}) {
+func (lg *logger) Fatalln(v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -163,7 +161,7 @@ func (lg *logger) Fatalln(v ...interface{}) {
 	os.Exit(1)
 }
 
-func (lg *logger) Panic(v ...interface{}) {
+func (lg *logger) Panic(v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -176,7 +174,7 @@ func (lg *logger) Panic(v ...interface{}) {
 	panic("")
 }
 
-func (lg *logger) Panicf(format string, v ...interface{}) {
+func (lg *logger) Panicf(format string, v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}
@@ -189,7 +187,7 @@ func (lg *logger) Panicf(format string, v ...interface{}) {
 	panic("")
 }
 
-func (lg *logger) Panicln(v ...interface{}) {
+func (lg *logger) Panicln(v ...any) {
 	if lg.logType&flags == 0 {
 		return
 	}

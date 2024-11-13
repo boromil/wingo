@@ -501,13 +501,13 @@ type SelectData struct {
 	Highlighted func(wrk *Workspace)
 }
 
-func (wrk *Workspace) SelectSelected(data interface{}) {
+func (wrk *Workspace) SelectSelected(data any) {
 	if f := data.(SelectData).Selected; f != nil {
 		f(wrk)
 	}
 }
 
-func (wrk *Workspace) SelectHighlighted(data interface{}) {
+func (wrk *Workspace) SelectHighlighted(data any) {
 	if f := data.(SelectData).Highlighted; f != nil {
 		f(wrk)
 	}

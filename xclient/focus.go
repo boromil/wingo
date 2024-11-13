@@ -24,8 +24,8 @@ func (c *Client) Focused() {
 	ewmh.ActiveWindowSet(wm.X, c.Id())
 	c.addState("_NET_WM_STATE_FOCUSED")
 
-	event.Notify(event.FocusedClient{c.Id()})
-	event.Notify(event.ChangedActiveClient{c.Id()})
+	event.Notify(event.FocusedClient{Id: c.Id()})
+	event.Notify(event.ChangedActiveClient{Id: c.Id()})
 	c.FireHook(hook.Focused)
 }
 
@@ -38,8 +38,8 @@ func (c *Client) Unfocused() {
 	c.removeState("_NET_WM_STATE_FOCUSED")
 
 	if wasFocused {
-		event.Notify(event.UnfocusedClient{c.Id()})
-		event.Notify(event.ChangedActiveClient{0})
+		event.Notify(event.UnfocusedClient{Id: c.Id()})
+		event.Notify(event.ChangedActiveClient{Id: 0})
 		c.FireHook(hook.Unfocused)
 	}
 }

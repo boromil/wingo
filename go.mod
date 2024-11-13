@@ -1,6 +1,6 @@
 module github.com/boromil/wingo
 
-go 1.17
+go 1.23
 
 require (
 	github.com/BurntSushi/cmd v0.0.0-20121122232022-d54777ad4400

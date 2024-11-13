@@ -89,7 +89,7 @@ func (c *Client) Map() {
 	c.frame.Map()
 	icccm.WmStateSet(wm.X, c.Id(), &icccm.WmState{State: icccm.StateNormal})
 
-	event.Notify(event.MappedClient{c.Id()})
+	event.Notify(event.MappedClient{Id: c.Id()})
 }
 
 func (c *Client) Unmap() {
@@ -101,7 +101,7 @@ func (c *Client) Unmap() {
 	c.win.Unmap()
 	icccm.WmStateSet(wm.X, c.Id(), &icccm.WmState{State: icccm.StateIconic})
 
-	event.Notify(event.UnmappedClient{c.Id()})
+	event.Notify(event.UnmappedClient{Id: c.Id()})
 }
 
 func (c *Client) Close() {
